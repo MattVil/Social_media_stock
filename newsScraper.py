@@ -70,13 +70,13 @@ def getDailyNews():
     news['scraping_date'] = datetime.now()
 
     try:
-        aux = pd.read_csv('./data/news.csv')
+        aux = pd.read_csv('./data/news/news.csv')
         aux = aux.append(news)
         aux = aux.drop_duplicates('url')
         aux.reset_index(inplace=True, drop=True)
-        aux.to_csv('./data/news.csv', encoding='utf-8', index=False)
+        aux.to_csv('./data/news/news.csv', encoding='utf-8', index=False)
     except:
-        news.to_csv('./data/news.csv', index=False, encoding='utf-8')
+        news.to_csv('./data/news/news.csv', index=False, encoding='utf-8')
 
     print('Done')
 
