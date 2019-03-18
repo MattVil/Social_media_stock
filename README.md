@@ -15,4 +15,4 @@ Additionnal requirements :
 
 - Collect news data : [newsapi.org](https://newsapi.org)
 - Collect Twitter data :
-- Collect stock data :
+- Collect stock data : Yahoo! finance
