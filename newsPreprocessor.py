@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-COMPANIES = ['Tesla', 'Google', 'Apple', 'Facebook', 'Amazon', 'General Motor',
+COMPANIES = ['Tesla', 'Google', 'Apple', 'Facebook', 'Amazon', 'General Motors',
              'CVS Health', 'Chevron', 'Verizon', 'JP Morgan']
 
 def plot_category_distribution(data):
