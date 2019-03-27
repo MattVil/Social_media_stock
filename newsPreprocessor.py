@@ -4,7 +4,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 COMPANIES = ['Tesla', 'Google', 'Apple', 'Facebook', 'Amazon', 'General Motors',
-             'CVS Health', 'Chevron', 'Verizon', 'JP Morgan']
+             'CVS Health', 'Chevron', 'Verizon', "JPMorgan's"]
+
+COMPANIES_WORDS = {
+    'Tesla':            ['Tesla', "Tesla's"],
+    'Google':           ['Google', "Google's"],
+    'Apple':            ['Apple', "Apple's"],
+    'Facebook':         ['Facebook', "Facebook's"],
+    'Amazon':           ['Amazon', "Amazon's"],
+    'General Motors':   ['General Motors', 'General Motor', "General Motor's"],
+    'CVS Health':       ['CVS Health', "CVS Health's"],
+    'Chevron':          ['Chevron', "Chevron's"],
+    'Verizon':          ['Verizon', "Verizon's"],
+    "JP Morgan":        ["JP Morgan", "JPMorgan", "JPMorgan's"]
+}
 
 def plot_category_distribution(data):
     plot = data.category.value_counts(normalize=True).plot(kind='bar', grid=True, figsize=(16, 9))
@@ -40,6 +53,8 @@ def main():
 
         with open("./data/news/{}.txt".format(company.replace(' ', '_')), "wb") as f:
             pickle.dump(news, f)
+
+    plot_company_distribution(newsPandas)
 
 if __name__ == '__main__':
     main()
