@@ -1,4 +1,6 @@
 stock/*
 data/*
 
+key.py
+
 text-emotion-classification/*
