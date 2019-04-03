@@ -35,6 +35,46 @@ def predict_positivity(sentences):
         pred[i] = y['compound']
     return pred
 
+def predict_daily_positivity(data):
+    pred = np.zeros((len(data),))
+    sia = SentimentIntensityAnalyzer()
+    for i, date in enumerate(data.keys()):
+        nbSentence = len(data[date])
+        for sentence in data[date]:
+            y = sia.polarity_scores(sentence)
+            pred[i] += y['compound']
+        pred[i] = pred[i]/nbSentence
+    return pred
+
+def predict_daily_emotion(data):
+    with open(PATH_TRAINING + 'tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+
+    classes = ["neutral", "happy", "sad", "hate","anger"]
+
+    model = load_model(PATH_TRAINING + MODEL_NAME)
+    pred = np.zeros((len(data), 5))
+    for i, key in enumerate(data.keys()):
+        nbSentence = len(data[key])
+        for news in data[key]:
+            sequences_test = tokenizer.texts_to_sequences([news])
+            data_int_t = pad_sequences(sequences_test, padding='pre', maxlen=(MAX_SEQUENCE_LENGTH-5))
+            data_test = pad_sequences(data_int_t, padding='post', maxlen=(MAX_SEQUENCE_LENGTH))
+            pred[i] += model.predict(data_test)[0]
+        pred[i] = pred[i]/nbSentence
+    return pred
+
+def sortByDate(data):
+    dic = {}
+    for news, date in data:
+        dateTime = date.split('T')
+        date = dateTime[0]
+        if(date not in dic):
+            dic[date] = [news]
+        else:
+            dic[date].append(news)
+    return dic
+
 def plot_confusion_matrix(cm, labels,
                           normalize=True,
                           title='Confusion Matrix (Validation Set)',
@@ -116,12 +156,22 @@ def main():
         sentences.append(news)
         dates.append(date)
 
-    y_pos = predict_positivity(sentences)
-    y_emo = predict_emotion(sentences)
+    # y_pos = predict_positivity(sentences)
+    # y_emo = predict_emotion(sentences)
+    dic = sortByDate(google)
+    y_pos = predict_daily_positivity(dic)
+    y_emo = predict_daily_emotion(dic)
+    # print(y_emo)
     y_final = np.c_[y_pos, y_emo]
+    print(y_final.shape)
     print(y_final)
 
-    plot_analysis(y_final, dates)
+    plot_analysis(y_final, dic.keys())
+
+    # dic = sortByDate(google)
+    # for key in dic.keys():
+    #     print(key)
+    #     print(dic[key])
 
 
 if __name__ == '__main__':
