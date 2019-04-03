@@ -14,6 +14,9 @@ PATH_TRAINING = PROJECT_PATH + "text-emotion-classification/"
 MODEL_NAME = "checkpoint-0.962.h5"
 MAX_SEQUENCE_LENGTH = 30
 
+COMPANIES = ['Tesla', 'Google', 'Apple', 'Facebook', 'Amazon', 'General Motors',
+             'CVS Health', 'Chevron', 'Verizon', "JPMorgan's"]
+
 def predict_emotion(sentences):
     with open(PATH_TRAINING + 'tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
@@ -115,7 +118,7 @@ def loadCompany(company):
     print("Error while reading the {}.txt file.".format(company))
     return None
 
-def plot_analysis(predictions, dates):
+def plot_analysis(predictions, dates, company):
     positivity = predictions[:,0]
     neutral = predictions[:,1]
     happy = predictions[:,2]
@@ -124,6 +127,7 @@ def plot_analysis(predictions, dates):
     anger = predictions[:,5]
 
     plt.xticks(rotation=90)
+    plt.title(company, fontsize=16, fontweight='bold')
     plt.plot(dates, positivity, label="Positivity")
     plt.plot(dates, neutral, label="Neutral")
     plt.plot(dates, happy, label="Happy")
@@ -148,30 +152,26 @@ def main():
                  "I want to buy a onesie… but know it won’t suit me.",
                  "What baby bonus scheme ??? To grow up a kid in Singapore you think is easy now bo ??? Both parent need to work to grow up a kid until 21 , you think tats easy bo ??? Think la"]
 
-    sentences = []
-    dates = []
+    for companyName in COMPANIES:
 
-    google = loadCompany("Apple")
-    for news, date in google:
-        sentences.append(news)
-        dates.append(date)
+        sentences = []
+        dates = []
 
-    # y_pos = predict_positivity(sentences)
-    # y_emo = predict_emotion(sentences)
-    dic = sortByDate(google)
-    y_pos = predict_daily_positivity(dic)
-    y_emo = predict_daily_emotion(dic)
-    # print(y_emo)
-    y_final = np.c_[y_pos, y_emo]
-    print(y_final.shape)
-    print(y_final)
+        companyName = companyName.replace(' ', '_')
+        company = loadCompany(companyName)
+        for news, date in company:
+            sentences.append(news)
+            dates.append(date)
 
-    plot_analysis(y_final, dic.keys())
+        dic = sortByDate(company)
+        y_pos = predict_daily_positivity(dic)
+        y_emo = predict_daily_emotion(dic)
 
-    # dic = sortByDate(google)
-    # for key in dic.keys():
-    #     print(key)
-    #     print(dic[key])
+        y_final = np.c_[y_pos, y_emo]
+        print(y_final.shape)
+        print(y_final)
+
+        plot_analysis(y_final, dic.keys(), companyName)
 
 
 if __name__ == '__main__':
