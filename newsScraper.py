@@ -5,9 +5,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from tqdm import tqdm, tqdm_notebook
 
-
-NEWSAPI_KEY = "6a0bc3b5399a402b8bcba33773ebeecb"
-SELECTED_CATEGORY = ['general', 'technology', 'business', 'science'] # add 'entertainment' and 'sports'
+from key import NEWSAPI_KEY
+from utils import SELECTED_CATEGORY
 
 def getSources():
     '''Return the new's sources avaible'''

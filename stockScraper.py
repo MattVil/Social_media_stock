@@ -4,17 +4,8 @@ import pandas_datareader.data as web
 import matplotlib.pyplot as plt
 from matplotlib import style
 
+from utils import STOCK
 
-STOCK = {'Tesla'            : 'TSLA',
-         'Google'           : 'GOOGL',
-         'Apple'            : 'AAPL',
-         'Facebook'         : 'FB',
-         'Amazon'           : 'AMZN',
-         'General motors'   : 'GM',
-         'CVS Health'       : 'CVS',
-         'Chevron'          : 'CVX',
-         'Verizon'          : 'VZ',
-         'JP Morgan'        : 'JPM'}
 
 def get_daily_change(company, date):
     '''date : (month, day, year)'''

@@ -1,21 +1,19 @@
 import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
-from keras.models import load_model
-from keras.preprocessing.sequence import pad_sequences
-from sklearn.metrics import classification_report, confusion_matrix
-import matplotlib.pyplot as plt
 import numpy as np
 import itertools, pickle
 import pickle
+import matplotlib.pyplot as plt
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from keras.models import load_model
+from keras.preprocessing.sequence import pad_sequences
+from sklearn.metrics import classification_report, confusion_matrix
+
+from utils import COMPANIES
 
 PROJECT_PATH = "/home/matthieu/Project/Social_media_stock/"
 PATH_TRAINING = PROJECT_PATH + "text-emotion-classification/"
 MODEL_NAME = "checkpoint-0.962.h5"
 MAX_SEQUENCE_LENGTH = 30
-
-COMPANIES = ['Tesla', 'Google', 'Apple', 'Facebook', 'Amazon', 'General Motors',
-             'CVS Health', 'Chevron', 'Verizon', "JPMorgan's"]
 
 def predict_emotion(sentences):
     with open(PATH_TRAINING + 'tokenizer.pickle', 'rb') as handle:
