@@ -11,7 +11,7 @@ def get_daily_change(company, date):
     '''date : (month, day, year)'''
     day = dt.datetime(date[2], date[0], date[1]) - dt.timedelta(1)
 
-    df = web.DataReader(STOCK[company], 'yahoo', day)
+    df = web.DataReader(STOCK[company.replace('_', ' ')], 'yahoo', day)
     df.reset_index(inplace=True,drop=False)
     df = df[df['Date'] == '{}-{}-{}'.format(date[2], date[0], date[1])]
     if(df.empty):

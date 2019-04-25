@@ -19,10 +19,12 @@ STOCK = {'Tesla'            : 'TSLA',
          'Apple'            : 'AAPL',
          'Facebook'         : 'FB',
          'Amazon'           : 'AMZN',
-         'General motors'   : 'GM',
+         'General Motors'   : 'GM',
          'CVS Health'       : 'CVS',
          'Chevron'          : 'CVX',
          'Verizon'          : 'VZ',
-         'JP Morgan'        : 'JPM'}
+         'JPMorgan'        : 'JPM'}
 
 SELECTED_CATEGORY = ['general', 'technology', 'business', 'science'] # add 'entertainment' and 'sports'
+
+PROJECT_PATH = "/home/matthieu/Project/Social_media_stock/"

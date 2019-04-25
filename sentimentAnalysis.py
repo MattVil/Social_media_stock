@@ -8,11 +8,12 @@ from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 from sklearn.metrics import classification_report, confusion_matrix
 
-from utils import COMPANIES
+from utils import COMPANIES, PROJECT_PATH
+from stockScraper import get_daily_change
 
-PROJECT_PATH = "/home/matthieu/Project/Social_media_stock/"
+
 PATH_TRAINING = PROJECT_PATH + "text-emotion-classification/"
-MODEL_NAME = "checkpoint-0.962.h5"
+MODEL_NAME = "checkpoint-1.144.h5"
 MAX_SEQUENCE_LENGTH = 30
 
 def predict_emotion(sentences):
@@ -150,6 +151,7 @@ def main():
                  "I want to buy a onesie… but know it won’t suit me.",
                  "What baby bonus scheme ??? To grow up a kid in Singapore you think is easy now bo ??? Both parent need to work to grow up a kid until 21 , you think tats easy bo ??? Think la"]
 
+    data, label = [], []
     for companyName in COMPANIES:
 
         sentences = []
@@ -166,11 +168,31 @@ def main():
         y_emo = predict_daily_emotion(dic)
 
         y_final = np.c_[y_pos, y_emo]
-        print(y_final.shape)
+
+        # plot_analysis(y_final, dic.keys(), companyName)
+        dates = dic.keys()
+        stock_changes = []
+        for idx, date in enumerate(dates):
+            date_splited = date.split('-')
+            stock_changes.append(get_daily_change(companyName, (int(date_splited[1]), int(date_splited[2]), int(date_splited[0]))))
+        stock_changes = np.asarray(stock_changes)
+        print(stock_changes)
         print(y_final)
+        print(stock_changes.shape)
+        print(y_final.shape)
+        for i in range(len(stock_changes)):
+            if(stock_changes[i] != None):
+                data.append(stock_changes[i])
+                label.append(y_final[i])
 
-        plot_analysis(y_final, dic.keys(), companyName)
-
+    data = np.asarray(data)
+    label = np.asarray(label)
+    print(data)
+    print(label)
+    print(data.shape)
+    print(label.shape)
+    np.save(PROJECT_PATH+"data/emo.npy", data)
+    np.save(PROJECT_PATH+"data/label.npy", label)
 
 if __name__ == '__main__':
     main()
