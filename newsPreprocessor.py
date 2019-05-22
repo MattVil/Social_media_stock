@@ -33,7 +33,7 @@ def main():
     for company in newsPandas.keys():
         news = []
         for index, row in newsPandas[company].iterrows():
-            text = row['fullText']  # TODO: do preprocessing step
+            text = row['fullText']
             date = row['publishedAt']
             news.append([text, date])
 
