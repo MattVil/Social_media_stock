@@ -1,0 +1,40 @@
+              precision    recall  f1-score   support
+
+     neutral       0.36      0.41      0.39      1897
+       happy       0.61      0.51      0.56      3205
+         sad       0.51      0.63      0.56      3251
+        hate       0.66      0.47      0.55       862
+       anger       0.00      0.00      0.00       242
+
+   micro avg       0.52      0.52      0.52      9457
+   macro avg       0.43      0.40      0.41      9457
+weighted avg       0.52      0.52      0.51      9457
+
+
+[5.7173301e-02 9.0645975e-01 3.3276025e-02 2.3072325e-03 7.8364287e-04]
+I salute you for the bravery and sacrifice! A true hero indeed.
+Prediction: happy
+
+[0.23175694 0.23336752 0.36377564 0.13644046 0.03465943]
+I am sorry but I trust HRW I damned sight more than the PAP and it's cronies! Off course the PAP will say that they (HRW) made things up...despite of the fact that SG is a dictator state!?
+Prediction: sad
+
+[0.43687904 0.21578103 0.26401064 0.07026999 0.01305916]
+PAP are taking the piss again!
+Prediction: neutral
+
+[0.13742602 0.11905778 0.5594949  0.15904418 0.02497706]
+Thought he sold his kidney to buy it; Instead, he bought a kidney then bought the car Filthy rich This is why we need communism
+Prediction: sad
+
+[0.3554548  0.21474229 0.39906374 0.02492736 0.00581168]
+Somebody needs to water Tharman's head, hair needs to be grown there
+Prediction: sad
+
+[0.13628928 0.05931799 0.34367222 0.39158517 0.0691354 ]
+what a nuisance fk. a proper clean and flat footpath,,now obstructed by sharedbikes..! which idiotic MP allowed this to happen?
+Prediction: hate
+
+[0.29560643 0.18755545 0.4258172  0.06184974 0.02917109]
+What baby bonus scheme ??? To grow up a kid in Singapore you think is easy now bo ??? Both parent need to work to grow up a kid until 21 , you think tats easy bo ??? Think la
+Prediction: sad

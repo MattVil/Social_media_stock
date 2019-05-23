@@ -1,0 +1,11 @@
+          precision    recall  f1-score   support
+
+neutral       0.50      0.38      0.43      1907
+happy       0.67      0.67      0.67      3238
+sad       0.60      0.73      0.66      3218
+hate       0.88      0.66      0.75       865
+anger       0.86      0.77      0.81       229
+
+micro avg       0.63      0.63      0.63      9457
+macro avg       0.70      0.64      0.67      9457
+weighted avg       0.64      0.63      0.63      9457
